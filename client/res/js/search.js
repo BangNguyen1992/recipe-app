@@ -5,7 +5,7 @@ let resultElement;
 
 function youtubeSearch() {
   let elements = document.querySelectorAll('.youtube-search');
-  elements.forEach((element) => {
+  elements.forEach(element => {
     element.addEventListener('click', e => {
       e.preventDefault();
       //Get the selected recipe based on the index
@@ -14,7 +14,7 @@ function youtubeSearch() {
       gapi.client.setApiKey('AIzaSyAVT9yy6z0lxpG0rzGavA7iAiSacQaRkMw');
       gapi.client.load('youtube', 'v3', () => {
         makeRequest(selectedRecipe.name)
-          .then((result) => {
+          .then(result => {
             console.log("Youtube result", result);
             //Go to card-view and find search-result
             resultElement = $(e.srcElement).parent().parent().find('.search-results');
@@ -27,7 +27,7 @@ function youtubeSearch() {
 }
 
 function displayResults(result) {
-  console.log("object", $);
+  // console.log("object", $);
   $.each(result, (index, item) => {
     const vidTitle = `<h5>` + item.snippet.title + `</h5>`;
     const vidThumburl = item.snippet.thumbnails.default.url;
