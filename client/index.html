@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Final Project</title>
+  <!--Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!--Custom Style-->
+  <link rel="stylesheet" href="./res/css/style.css" />
+</head>
+
+<body>
+  <div class="container-fluid">
+    <!--Search form idea from Sebastian Popp-->
+    <div class="col-xs-12">
+      <div class="search-section">
+        <div class="cntr">
+          <div class="cntr-innr">
+            <form id="searchForm">
+              <div class="form-group">
+                <label class="search" for="inpt_search">
+                  <input id="inpt_search" class=" " type="text" />
+                </label>
+              </div>
+              <!--<button type="submit" value="Submit" class="btn btn-default btn-search">Submit</button>-->
+              <!--<a class="btn btn-default btn-search">Search</a>-->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recipe-section">
+      <div class="col-xs-10">
+        <div class="flex-container">
+          <div class=" ">
+            <script id="template" type="text/x-jsrender">
+              <div class="card-view">
+                <h4 class="name-tag text-center">{{:name}}</h4>
+                <a href="{{:source}}" target="_blank"><img class="img-responsive" src="{{:imageUrl}}"></a>
+                <button data-index="{{:index}}" class="youtube-search">Search</button>
+
+                <ul class="search-results">
+                </ul>
+
+              </div>
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="row">-->
+    <div class="chat-section">
+      <div class="col-xs-2">
+        <table>
+          <tr>
+            <td class="white">Your name:</td>
+            <td><input id="name" type="text" size="20"></td>
+          </tr>
+          <!--<tr>
+            <td class="white">Your Message:</td>
+            <td><input id="message" type="text" size="50"></td>
+          </tr>-->
+        </table>
+        <h3 class="white">Your search</h3>
+        <div id="messages">
+        </div>
+      </div>
+
+    </div>
+
+    <!--</div>-->
+  </div>
+
+
+  <!--JQuery-->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <!--Bootstrap-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!--JSRender-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.83/jsrender.js"></script>
+
+  <!--Socket.io-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+
+  <!--Custom JS-->
+  <!--<script src="./res/js/masonry.js"></script>-->
+  <script src="https://apis.google.com/js/client.js"></script>
+  <script src="./res/js/main.js"></script>
+  <script src="./res/js/search.js"></script>
+  <script src="./res/js/chat.js"></script>
+
+</body>
+
+</html>
