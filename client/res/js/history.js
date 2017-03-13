@@ -6,7 +6,7 @@
  */
 function initSocket(app_id) {
   console.log('using hostname: ' + window.location.hostname);
-  const socket = io('http://localhost:3000/');
+  const socket = io(window.location.hostnam);
   let sessionid;
   // register room to the server
   socket.on('connect', function() {
@@ -15,7 +15,6 @@ function initSocket(app_id) {
     socket.emit('app_id', app_id);
   });
 
-  // on response
   socket.on('message', function(data) {
     let sender = data.socketid;
     if (data.socketid === sessionid) {
@@ -23,7 +22,7 @@ function initSocket(app_id) {
     }
     console.log('message from ' + sender + ': ' + JSON.stringify(data));
 
-    $('#messages').append(data.client_name + ' was looking for dishes made from"' + data.str + '"</br>');
+    $('#messages').append(data.client_name + ' was looking for dishes made from"' + data.str + '"</br></br>');
   });
 
   // sending messages
@@ -31,7 +30,7 @@ function initSocket(app_id) {
     const code = (e.keyCode ? e.keyCode : e.which);
     if (code == 13 && socket) { // keyboard Enter
       const msg = {};
-      msg.client_name = $('#name').val();
+      $('#name').val() ? msg.client_name = $('#name').val() : msg.client_name = 'Anonymous';
       msg.app_id = app_id;
       msg.time = Date.now();
       msg.str = $('#inpt_search').val();
@@ -42,23 +41,6 @@ function initSocket(app_id) {
   });
 }
 
-/** @function */
-function initNameCheck() {
-  $('#inpt_search').prop('disabled', true);
-  $('#inpt_search').css({ 'background-color': 'grey' });
-
-  $('#name').on('change paste keyup', function() {
-    if ($('#name').val()) {
-      $('#inpt_search').prop('disabled', false);
-      $('#inpt_search').css({ 'background-color': 'white' });
-    } else {
-      $('#inpt_search').prop('disabled', true);
-      $('#inpt_search').css({ 'background-color': 'grey' });
-    }
-  });
-}
-
 $(document).ready(function() {
-  initNameCheck();
-  initSocket('171992');
+  initSocket('recipe');
 });

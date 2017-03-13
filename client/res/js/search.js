@@ -15,11 +15,11 @@ function youtubeSearch() {
       gapi.client.load('youtube', 'v3', () => {
         makeRequest(selectedRecipe.name)
           .then(result => {
-            console.log("Youtube result", result);
+            // console.log("Youtube result", result);
             //Go to card-view and find search-result
             resultElement = $(e.srcElement).parent().parent().find('.search-results');
             resultElement.empty(); //Clear the last results
-            displayResults(result);
+            result[0] ? displayResults(result) : resultElement.append(`<p>` + noResult + `</p>`);
           });
       });
     })
@@ -27,17 +27,13 @@ function youtubeSearch() {
 }
 
 function displayResults(result) {
-  // console.log("object", $);
   $.each(result, (index, item) => {
     const vidTitle = `<h5>` + item.snippet.title + `</h5>`;
-    const vidThumburl = item.snippet.thumbnails.default.url;
-    const vidThumbimg = '<div><img id="thumb" src="' + vidThumburl + '" alt="No  Image  Available." style="width:204px;height:128px"></div>';
+    // const vidThumburl = item.snippet.thumbnails.default.url;
+    // const vidThumbimg = '<img id="thumb" src="' + vidThumburl + '" alt="No  Image  Available." style="width:204px;height:128px">';
+    const vidEmbeded = `<iframe width= "204px" height= "128px" src= ` + "https://www.youtube.com/embed/" + item.id.videoId + `></iframe>`;
     //Display the searched result
-    if (result) {
-      resultElement.append('<pre>' + vidTitle + vidThumbimg + '</pre>');
-    } else {
-      resultElement.append('<pre>There is no result for your search</pre>');
-    }
+    resultElement.append(`<div class="text-center">` + vidTitle + vidEmbeded + `</div>`);
   });
 }
 
@@ -51,7 +47,6 @@ function makeRequest(q) {
     });
     request.execute(response => {
       const srchItems = response.result.items;
-      console.log(srchItems);
       resolve(srchItems);
     })
   });
